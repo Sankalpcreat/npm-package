@@ -2,7 +2,7 @@
 
 import NPMChart from '@/components/NPMChart'
 import ColorPicker from '@/components/ColorPicket'
-import {useFetchData} from  '@/hooks/useFetchData'
+import useFetchData from  '@/hooks/useFetchData'
 
 export default function PackagePage({params}:{params:{pkg:string}}){
     const pkgName=params.pkg
