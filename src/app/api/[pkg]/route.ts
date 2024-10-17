@@ -1,4 +1,4 @@
-// src/app/api/[pkg]/route.ts
+
 import { NextResponse } from 'next/server';
 import { fetchNpmPackage } from '@/lib/fetchNpmPackage';
 
