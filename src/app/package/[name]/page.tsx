@@ -3,10 +3,8 @@ import Chart from '@/components/Chart';
 const PackagePage = async ({ params }: { params: { name: string } }) => {
   const packageName = params.name;
 
-  // Get base URL depending on environment
-  const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` // Production URL from Vercel
-    : 'http://localhost:3000'; // Development URL
+  // Use Vercel production URL directly, no need for environment variable check
+  const baseUrl = 'https://npmpackage.vercel.app'; // Direct Vercel application URL
 
   // Fetch package details with absolute URL
   const detailsRes = await fetch(`${baseUrl}/api/npm/details?name=${packageName}`);
@@ -27,8 +25,7 @@ const PackagePage = async ({ params }: { params: { name: string } }) => {
       <p>Total Downloads: {downloadData.totalDownloads.toLocaleString()}</p>
 
       <div className="mt-8">
-      <Chart downloads={downloadData.downloads} releaseDate={new Date(releaseDate)} />
-
+        <Chart downloads={downloadData.downloads} releaseDate={new Date(releaseDate)} />
       </div>
     </div>
   );
