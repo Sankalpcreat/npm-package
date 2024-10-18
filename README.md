@@ -3,6 +3,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Getting Started
 
 First, run the development server:
+![npm-charts](public/screenrun-10-18-2024-18-28-49.gif)
 
 ```bash
 npm run dev
