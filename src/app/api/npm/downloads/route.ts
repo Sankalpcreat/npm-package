@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-
+interface DownloadData {
+  downloads: number;
+}
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const packageName = searchParams.get('name');
@@ -34,7 +36,7 @@ export async function GET(request: Request) {
   const data = await res.json();
 
   // Calculate the cumulative downloads
-  const cumulativeDownloads = data.downloads.reduce((acc, curr) => acc + curr.downloads, 0);
+  const cumulativeDownloads = data.downloads.reduce((acc: number, curr: DownloadData) => acc + curr.downloads, 0);
 
   return NextResponse.json({
     totalDownloads: cumulativeDownloads,

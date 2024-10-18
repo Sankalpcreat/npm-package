@@ -27,7 +27,8 @@ const PackagePage = async ({ params }: { params: { name: string } }) => {
       <p>Total Downloads: {downloadData.totalDownloads.toLocaleString()}</p>
 
       <div className="mt-8">
-        <Chart downloads={downloadData.downloads} releaseDate={releaseDate} />
+      <Chart downloads={downloadData.downloads} releaseDate={new Date(releaseDate)} />
+
       </div>
     </div>
   );

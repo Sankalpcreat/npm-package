@@ -29,6 +29,7 @@ ChartJS.register(
 
 interface ChartProps {
   downloads: Array<{ day: string; downloads: number }>;
+  releaseDate:Date;
 }
 
 // Helper function to group downloads by month and calculate monthly totals
@@ -98,7 +99,7 @@ const Chart = ({ downloads }: ChartProps) => {
 
   const data = {
     labels: chartData.map((entry) =>
-      viewMode === "monthly" ? entry.month : entry.week
+      viewMode === "monthly" ? (entry as { month: string }).month : (entry as { week: string }).week
     ), // Display month or week as labels
     datasets: [
       {
@@ -111,13 +112,12 @@ const Chart = ({ downloads }: ChartProps) => {
       },
     ],
   };
-
   const options = {
     responsive: true,
     plugins: {
       legend: {
         display: true,
-        position: "top",
+        position: "top" as const, // Ensures 'top' is treated as a valid position
         labels: {
           font: {
             size: 14, // Increase font size for the legend
@@ -134,7 +134,7 @@ const Chart = ({ downloads }: ChartProps) => {
     },
     scales: {
       x: {
-        type: "category", // Category scale for the x-axis
+        type: "category" as const, // Explicitly define the type for category scale
         title: {
           display: true,
           text: viewMode === "monthly" ? "Month" : "Week", // Update axis title based on view mode
@@ -149,7 +149,7 @@ const Chart = ({ downloads }: ChartProps) => {
         },
       },
       y: {
-        type: "linear", // Linear scale for the y-axis
+        type: "linear" as const, // Use "linear" for numeric data (download counts)
         title: {
           display: true,
           text: `${viewMode.charAt(0).toUpperCase() + viewMode.slice(1)} Downloads`,
@@ -158,7 +158,7 @@ const Chart = ({ downloads }: ChartProps) => {
           },
         },
         ticks: {
-          callback: (value: any) => formatYAxisLabel(value), // Format y-axis ticks
+          callback: (value: number | string) => formatYAxisLabel(Number(value)), // Format y-axis ticks
           font: {
             size: 12, // Increase font size for y-axis labels
           },

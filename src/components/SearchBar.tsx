@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,9 +9,13 @@ const packages = ['vue', 'react', 'svelte', '@angular/core', 'solid-js', 'next',
 
 const SearchBar = () => {
   const [query, setQuery] = useState('');
-  const [randomPackages] = useState(() => packages.sort(() => 0.5 - Math.random()).slice(0, 4));
+  const [randomPackages, setRandomPackages] = useState<string[]>([]);
+  
   const router = useRouter();
 
+useEffect(() => {
+    setRandomPackages(packages.sort(() => 0.5 - Math.random()).slice(0, 4))
+  }, [])
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
