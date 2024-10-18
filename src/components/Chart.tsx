@@ -30,6 +30,8 @@ ChartJS.register(
 interface ChartProps {
   downloads: Array<{ day: string; downloads: number }>;
   releaseDate:Date;
+  className?: string;
+
 }
 
 // Helper function to group downloads by month and calculate monthly totals

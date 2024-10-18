@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button1"; // Ensure the path is correct
-import { Card } from "@/components/ui/card"; // Adjust import to import Card
+import { Card } from "@/components/ui/Card"; // Adjust import to import Card
 import { fetchSimilarPackages } from '@/services/fetchPackages'; // Update import
 import { Question, Answer, PackageInfo } from '@/types/QATypes';
 

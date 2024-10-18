@@ -1,5 +1,18 @@
 import { Answer, PackageInfo } from "@/types/QATypes";
+interface NPMPackage {
+  package: {
+    name: string;
+    description: string | null; // Can be null if no description is provided
+    links: {
+      npm: string;
+    };
+    downloads?: number; // Optional if not always available
+  };
+}
 
+interface NPMSearchResult {
+  objects: NPMPackage[];
+}
 // Fetch similar packages from the npm registry based on user answers
 export async function fetchSimilarPackages(answers: Answer[]): Promise<PackageInfo[]> {
   const searchTerms = generateSearchTerms(answers);
@@ -12,8 +25,8 @@ export async function fetchSimilarPackages(answers: Answer[]): Promise<PackageIn
       if (!response.ok) {
         throw new Error(`Failed to fetch package data for term "${term}": ${response.status} ${response.statusText}`);
       }
-      const data = await response.json();
-      return data.objects.map((pkg: any) => ({
+      const data:NPMSearchResult = await response.json();
+      return data.objects.map((pkg: NPMPackage) => ({
         name: pkg.package.name,
         description: pkg.package.description || 'No description available',
         website: pkg.package.links.npm || `https://www.npmjs.com/package/${pkg.package.name}`,
