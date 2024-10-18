@@ -16,6 +16,9 @@ const PackagePage = async ({ params }: { params: { name: string } }) => {
   const downloadsRes = await fetch(`${baseUrl}/api/npm/downloads?name=${packageName}`);
   const downloadData = await downloadsRes.json();
 
+  // Get the package release date from the details (assuming it's available in the response)
+  const releaseDate = new Date(details.date); // Assuming `details.date` contains the release date
+
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold">{details.name}</h1>
@@ -24,7 +27,7 @@ const PackagePage = async ({ params }: { params: { name: string } }) => {
       <p>Total Downloads: {downloadData.totalDownloads.toLocaleString()}</p>
 
       <div className="mt-8">
-        <Chart downloads={downloadData.downloads} />
+        <Chart downloads={downloadData.downloads} releaseDate={releaseDate} />
       </div>
     </div>
   );

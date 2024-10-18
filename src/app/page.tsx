@@ -2,11 +2,8 @@ import SearchBar from '@/components/SearchBar';
 
 const HomePage = () => {
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-6">NPM Package Search</h1>
-        <SearchBar />
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black flex flex-col items-center justify-center p-4">
+      <SearchBar />
     </div>
   );
 };
