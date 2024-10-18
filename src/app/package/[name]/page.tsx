@@ -3,23 +3,22 @@ import Chart from '@/components/Chart';
 const PackagePage = async ({ params }: { params: { name: string } }) => {
   const packageName = params.name;
 
-  // Use Vercel production URL directly, no need for environment variable check
-  const baseUrl = 'https://npmpackage.vercel.app'; // Direct Vercel application URL
 
-  // Fetch package details with absolute URL
+  const baseUrl = 'https://npmpackage.vercel.app'; 
+
+
   const detailsRes = await fetch(`${baseUrl}/api/npm/details?name=${packageName}`);
   const details = await detailsRes.json();
 
-  // Fetch download stats with absolute URL
   const downloadsRes = await fetch(`${baseUrl}/api/npm/downloads?name=${packageName}`);
   const downloadData = await downloadsRes.json();
 
-  // Get the package release date from the details (assuming it's available in the response)
-  const releaseDate = new Date(details.date); // Assuming `details.date` contains the release date
+
+  const releaseDate = new Date(details.date); 
 
   return (
     <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center p-4 relative overflow-hidden">
-      {/* Background SVG */}
+  
       <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -40,7 +39,7 @@ const PackagePage = async ({ params }: { params: { name: string } }) => {
         <rect width="100%" height="100%" fill="url(#dots)" />
       </svg>
 
-      {/* Main container for package details, set width to half */}
+
       <div className="relative z-10 p-8 max-w-2xl mx-auto bg-gray-900 bg-opacity-70 backdrop-blur-lg rounded-xl shadow-2xl mb-8 border border-gray-800">
 
         <h1 className="text-4xl font-bold text-white">{details.name}</h1>
@@ -51,7 +50,7 @@ const PackagePage = async ({ params }: { params: { name: string } }) => {
         </div>
       </div>
 
-      {/* Chart section centered below the main container */}
+
       <div className="w-full max-w-6xl mx-auto mb-8">
         <div className="flex justify-center">
           <Chart downloads={downloadData.downloads} releaseDate={releaseDate} className="w-full h-64 md:h-96" />
