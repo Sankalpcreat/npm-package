@@ -5,8 +5,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 ![npm-charts](public/screenrun-10-18-2024-18-28-49.gif)
 
-This is Structure of Application i build
-(public/image.png)
+
+![This is Structure of Application i build](public/image.png)
 
 ```bash
 npm run dev
