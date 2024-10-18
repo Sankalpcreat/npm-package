@@ -1,11 +1,12 @@
 "use client"
 import { useState,useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Search, Package } from "lucide-react";
+import { Search, Package,HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
-const packages = ['vue', 'react', 'svelte', '@angular/core', 'solid-js', 'next', 'hono', 'fastify', 'nuxt', 'astro', 'supabase', 'express', 'typescript', 'vite'];
+const packages = ['vue', 'react', 'svelte', 'angular', 'solid-js', 'next', 'hono', 'fastify', 'nuxt', 'astro', 'supabase', 'express', 'typescript', 'vite'];
 
 const SearchBar = () => {
   const [query, setQuery] = useState('');
@@ -25,12 +26,20 @@ useEffect(() => {
 
   return (
     <div className="w-full max-w-md bg-gray-900 bg-opacity-70 backdrop-blur-lg rounded-xl shadow-2xl p-8 space-y-6 border border-gray-800">
-      <div className="text-center space-y-2">
-        <Package className="mx-auto h-12 w-12 text-red-600" />
-        <h1 className="text-4xl font-bold text-gray-100">NPM Chart</h1>
-        <p className="text-sm text-gray-400">
-          Search for a package to see its download stats over time.
-        </p>
+      <div className="flex items-center justify-between">
+        <div className="text-center space-y-2">
+          <Package className="mx-auto h-12 w-12 text-red-600" />
+          <h1 className="text-4xl font-bold text-gray-100">NPM Chart</h1>
+          <p className="text-sm text-gray-400">
+            Search for a package to see its download stats over time.
+          </p>
+        </div>
+        {/* Q&A Icon Button */}
+        <Link href="/q&A">
+          <button className="absolute top-2 right-1 p-0 rounded-full transition duration-200">
+            <HelpCircle className="h-8 w-8 text-red-500" />
+          </button>
+        </Link>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="relative">

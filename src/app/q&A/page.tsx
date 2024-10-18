@@ -1,10 +1,10 @@
+import Link from 'next/link';
+import QASession from '@/components/QASession';
 
-import SearchBar from '@/components/SearchBar';
-
-
-const HomePage = () => {
+export default function QAPage() {
   return (
     <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    
       <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -24,13 +24,22 @@ const HomePage = () => {
         <rect width="100%" height="100%" fill="url(#chart)" />
         <rect width="100%" height="100%" fill="url(#dots)" />
       </svg>
-      <SearchBar />
-      
-      
 
-    
+      <div className="relative z-10 flex flex-col items-center">
+        <h1 className="text-3xl font-bold mb-6 text-white">Q&A Session</h1>
+        
+        {/* Q&A Session wrapped in a clickable area */}
+        <div className="cursor-pointer">
+          <QASession />
+        </div>
+
+        {/* Optional back button */}
+        <Link href="/">
+          <button className="mt-8 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+            Back to Home
+          </button>
+        </Link>
+      </div>
     </div>
   );
-};
-
-export default HomePage;
+}
